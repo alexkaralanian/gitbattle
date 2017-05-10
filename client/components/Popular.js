@@ -14,12 +14,12 @@ class Popular extends React.Component {
 			repos: null
 		}
 
-		// Here we bind the components methods to the constructor
+		// Here we bind the components method's this keyword' methods to the this keyword inside the constructor's context
 		this.updateLanguage = this.updateLanguage.bind(this)
 	}
 
 	// LIFECYCLE METHODS
-	// Lets us hook into view when speciic conditions happen (ie when component first renders, gets updated, etc...)
+	// Lets us hook into view when specific conditions happen (ie when component first renders, gets updated, etc...)
 	// AJAX requests go here...
 
 	componentDidMount(){
@@ -29,7 +29,12 @@ class Popular extends React.Component {
 	// COMPONENT METHODS
 	updateLanguage(lang){
 
-		this.setState(function() {
+	/*
+	- Here we are recieveing the language and passing lang in to change the state.
+	- We also bind this to the constructor.
+	*/
+
+		this.setState(() => {
 			return {
 				selectedLanguage: lang,
 				repos: null
@@ -43,7 +48,7 @@ class Popular extends React.Component {
 					repos: repos
 				}
 			})
-		})  // }.bind(this))
+		})  // }.bind(this), no longer necessary with arrow functions. The 'this keyword, which would normally be encapsulated in the encolsing function's scope, has access to the function's outer scope.
 	}
 
 	// RENDER METHOD
@@ -60,7 +65,10 @@ class Popular extends React.Component {
 					onSelect={this.updateLanguage}
 				/>
 
-				{/*JSON.stringify(this.state.repos, null, 2)*/}
+				{/*
+				Here we are passing down the this.updateLanguage method, which calls setState, to the 'SelectedLanguage' stateless functional component - as a prop named 'OnSelect'
+				*/}
+
 				{!this.state.repos
 					? <Loading />
 					: <RepoGrid repos = {this.state.repos} /> }
@@ -73,6 +81,9 @@ class Popular extends React.Component {
 // only renders ui and takes in state as props
 const SelectedLanguage = (props) => {
 
+	// Here we are mapping over the array of laguages
+	// Each lanuguage item gets its own click handler
+
 	let languages = ['All', 'Javascript', 'Ruby', 'Java', 'CSS', 'Python']
 
 	return (
@@ -84,6 +95,16 @@ const SelectedLanguage = (props) => {
 						onClick={props.onSelect.bind(null, lang)}
 						key={lang}>
 						{lang}
+
+						{/*
+						Here we are binding onSelect (aka this.updateLanguage) to the onClick handler.
+						  We already bound the this keyword of this.updateLanguage to the constructor's context, so first arg is null.
+						The next argument we are passing is lang (the seleted language) so that onSelect aka this.updateLanguage can pass in whichever specific language that was clicked on as an argument to this.updateLanguage, which will update state accordingly.
+
+						style= If lang === whichever language we selected, make the style an object with a specified color, else do nothing.
+
+					*/}
+
 					</li>
 				)
 			}, this)} {/* with arrow functions we do not neet to set the context of this with the map function any longer... leaving it here for context!! get it... */}
