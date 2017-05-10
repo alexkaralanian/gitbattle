@@ -2,12 +2,17 @@ import axios from 'axios'
 
 // FUNCTIONAL COMPOSITION...
 
+// getProfile: append /params
+
 function getProfile (username) {
   return axios.get(`http://api.github.com/users/${username}`)
   .then((user) => {
     return user.data
   })
 }
+
+// getRepos: insert params after username
+// append username/params/repos
 
 function getRepos(username) {
   return axios.get(`http://api.github.com/users/${username}/repos`)
@@ -51,6 +56,10 @@ function sortPlayers (players) {
     return b.score - a.score
   })
 }
+
+const id = 'YOUR_CLIENT_ID';
+const secret = 'YOUR_CLIENT_SECRET';
+const params =  '?client_id=' + id + '&client_secret=' + secret
 
 module.exports = {
 

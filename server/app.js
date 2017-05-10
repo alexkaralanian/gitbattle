@@ -4,10 +4,11 @@ const morgan = require('morgan');
 const path = require('path');
 
 app.use(morgan('dev')); //logging middleware
-app.use(express.static(path.join(__dirname, '../public'))); //serving up static files (e.g. css files)
+
+app.use(express.static(path.join(__dirname, '../dist'))); //serving up static files (e.g. css files)
 
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 //error handling middleware - MUST have all 4 parameters

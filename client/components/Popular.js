@@ -1,6 +1,7 @@
 import React from 'react'
 import api  from '../../utils/api'
 import PropTypes from 'prop-types'
+import Loading from './Loading'
 
 // STATEFUL COMPONENT CLASS
 class Popular extends React.Component {
@@ -60,7 +61,9 @@ class Popular extends React.Component {
 				/>
 
 				{/*JSON.stringify(this.state.repos, null, 2)*/}
-				{!this.state.repos ? <p>LOADING</p> : <RepoGrid repos = {this.state.repos} /> }
+				{!this.state.repos
+					? <Loading />
+					: <RepoGrid repos = {this.state.repos} /> }
 			</div>
 		)
 	}
@@ -83,7 +86,7 @@ const SelectedLanguage = (props) => {
 						{lang}
 					</li>
 				)
-			}, this)} {/* with arrow functions we do not neet to set the context of this with the map function any longer... leavng it here for context!! get it... */}
+			}, this)} {/* with arrow functions we do not neet to set the context of this with the map function any longer... leaving it here for context!! get it... */}
 		</ul>
 	)
 }

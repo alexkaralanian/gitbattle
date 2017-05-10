@@ -1,6 +1,7 @@
 import React from 'react'
-const PropTypes = require('prop-types')
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import PlayerPreview from './PlayerPreview'
 
 export default class Battle extends React.Component {
 
@@ -58,10 +59,13 @@ export default class Battle extends React.Component {
           {playerOneImage !== null &&
             <PlayerPreview
               avatar={playerOneImage}
-              username={playerOneName}
-              onReset={this.handleReset}
-              id="playerOne"
-            />
+              username={playerOneName}>
+                <button
+                  className="reset"
+                  onClick={this.handleReset.bind(null, 'playerOne')}>
+                  Reset
+                </button>
+            </PlayerPreview>
           }
 
           {!playerTwoName &&
@@ -74,10 +78,13 @@ export default class Battle extends React.Component {
           {playerTwoImage !== null &&
             <PlayerPreview
               avatar={playerTwoImage}
-              username={playerTwoName}
-              onReset={this.handleReset}
-              id="playerTwo"
-            />
+              username={playerTwoName}>
+                <button
+                  className="reset"
+                  onClick={this.handleReset.bind(null, 'playerTwo')}>
+                  Reset
+                </button>
+            </PlayerPreview>
           }
         </div>
         {playerOneImage && playerTwoImage &&
@@ -163,30 +170,5 @@ PlayerInput.propTypes = {
 
 //////////
 
-function PlayerPreview (props) {
-  return (
-    <div>
-      <div className="column">
-        <img
-          className="avatar"
-          src={props.avatar}
-          alt={`Avatar for ${props.username}`}
-        />
-        <h2 className="username">@{props.username}</h2>
-      </div>
-      <button
-        className="reset"
-        onClick={props.onReset.bind(null, props.id)}>
-        Reset
-      </button>
-    </div>
-  )
-}
 
-PlayerPreview.propTypes = {
-  avatar: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired
-}
 

@@ -1,38 +1,58 @@
-module.exports = {
+const path = require('path')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+
+const config = {
 
 	entry: './client/index.js',
 	output: {
-		path: __dirname,
-		filename: './public/bundle.js',
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'bundle.js',
 		publicPath: '/'
 	},
-
-	devtool: 'source-map',
 
 	module: {
 		rules: [
 			{
-				test: /\.jsx?$/,
+				test: /\.(js)$/,
 				exclude: /(node_modules|bower_components)/,
 				loader: 'babel-loader',
 				options: {
-					presets: ['react', 'es2015']
+					presets: ['env', 'react']
 				}
 			},
 			{
-				test: /\.scss$/,
+				test: /\.css$/,
 				use: [
 					'style-loader',
-					'css-loader',
-					'sass-loader'
+					'css-loader'
 				]
 			}
 		]
 	},
+
 	devServer: {
 		historyApiFallback: true
-	}
+	},
+
+	plugins: [
+	new HTMLWebpackPlugin({
+		template: 'public/index.html'
+	})]
 }
+
+if (process.env.NODE_ENV === 'production') {
+	config.plugins.push(
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+			}
+		}),
+		new webpack.optimize.UglifyJsPlugin()
+	)
+}
+
+module.exports = config
 
 // style loader injects styles into bundle.js
 // all css files are included into bundle
