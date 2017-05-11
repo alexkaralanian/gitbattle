@@ -8217,10 +8217,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // FUNCTIONAL COMPOSITION...
 
+var id = '0d14cab523ac448cf299';
+var secret = '264089d4eabe28edfab27e28e61e7bb2cd01e84e';
+var params = '?client_id=' + id + '&client_secret=' + secret;
+
 // getProfile: append /params
 
 function getProfile(username) {
-  return _axios2.default.get('http://api.github.com/users/' + username).then(function (user) {
+  return _axios2.default.get('http://api.github.com/users/' + username + '/' + params).then(function (user) {
     return user.data;
   });
 }
@@ -8229,7 +8233,7 @@ function getProfile(username) {
 // append username/params/repos
 
 function getRepos(username) {
-  return _axios2.default.get('http://api.github.com/users/' + username + '/repos');
+  return _axios2.default.get('http://api.github.com/users/' + username + '/' + params + '/repos');
 }
 
 function getStarCount(repos) {
@@ -8266,10 +8270,6 @@ function sortPlayers(players) {
     return b.score - a.score;
   });
 }
-
-var id = 'YOUR_CLIENT_ID';
-var secret = 'YOUR_CLIENT_SECRET';
-var params = '?client_id=' + id + '&client_secret=' + secret;
 
 module.exports = {
 

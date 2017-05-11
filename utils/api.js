@@ -57,10 +57,6 @@ function sortPlayers (players) {
   })
 }
 
-const id = 'YOUR_CLIENT_ID';
-const secret = 'YOUR_CLIENT_SECRET';
-const params =  '?client_id=' + id + '&client_secret=' + secret
-
 module.exports = {
 
   fetchPopularRepos: (language) => {
