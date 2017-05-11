@@ -11,3 +11,12 @@
 * Stay tuned for updated link for Firebase hosting.
 
 
+# Server Start-up
+
+1. $ git clone git@github.com:alexkaralanian/gitbattle.git
+
+2. $ yarn
+
+3. $ npm start
+
+4. Visit localhost:3001 in your browser
