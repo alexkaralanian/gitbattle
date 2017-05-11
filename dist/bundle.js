@@ -12970,7 +12970,7 @@ var Battle = function (_React$Component) {
     key: 'render',
     value: function render() {
 
-      var match = this.props.match;
+      var match = this.props.match; // what is this?
       var playerOneName = this.state.playerOneName;
       var playerTwoName = this.state.playerTwoName;
       var playerOneImage = this.state.playerOneImage;
@@ -12982,6 +12982,7 @@ var Battle = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'row' },
+          '  ',
           !playerOneName && _react2.default.createElement(PlayerInput, {
             id: 'playerOne',
             label: 'Player One',
@@ -13291,14 +13292,16 @@ var Popular = function (_React$Component) {
 			repos: null
 		};
 
-		// Here we bind the components method's this keyword' methods to the this keyword inside the constructor's context
+		// Here we bind the this keyword' to the constructor's context
 		_this.updateLanguage = _this.updateLanguage.bind(_this);
 		return _this;
 	}
 
 	// LIFECYCLE METHODS
-	// Lets us hook into view when specific conditions happen (ie when component first renders, gets updated, etc...)
-	// AJAX requests go here...
+	/* Lets us hook into view when specific conditions happen (ie
+ 		when component first renders, gets updated, etc...)
+  		AJAX requests go here...
+  */
 
 	_createClass(Popular, [{
 		key: 'componentDidMount',
@@ -13307,16 +13310,16 @@ var Popular = function (_React$Component) {
 		}
 
 		// COMPONENT METHODS
+		/*
+  - Here we are recieveing the language and passing lang in to change the state.
+  - We also bind this to the constructor.
+  - We also call fetchPopularRepost every time update Language is called and pass it lang, so that we get a view of currently selected langages via our git API call.
+  */
 
 	}, {
 		key: 'updateLanguage',
 		value: function updateLanguage(lang) {
 			var _this2 = this;
-
-			/*
-   - Here we are recieveing the language and passing lang in to change the state.
-   - We also bind this to the constructor.
-   */
 
 			this.setState(function () {
 				return {
@@ -13331,7 +13334,7 @@ var Popular = function (_React$Component) {
 						repos: repos
 					};
 				});
-			}); // }.bind(this), no longer necessary with arrow functions. The 'this keyword, which would normally be encapsulated in the encolsing function's scope, has access to the function's outer scope.
+			}); // }.bind(this), no longer necessary with arrow functions. The this keyword, which would normally be encapsulated in the enclosing function's scope, has access to the function's immediate outer scope.
 		}
 
 		// RENDER METHOD

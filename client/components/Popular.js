@@ -14,26 +14,29 @@ class Popular extends React.Component {
 			repos: null
 		}
 
-		// Here we bind the components method's this keyword' methods to the this keyword inside the constructor's context
+		// Here we bind the this keyword' to the constructor's context
 		this.updateLanguage = this.updateLanguage.bind(this)
 	}
 
 	// LIFECYCLE METHODS
-	// Lets us hook into view when specific conditions happen (ie when component first renders, gets updated, etc...)
-	// AJAX requests go here...
+	/* Lets us hook into view when specific conditions happen (ie
+			when component first renders, gets updated, etc...)
+	 		AJAX requests go here...
+	 */
 
 	componentDidMount(){
 		this.updateLanguage(this.state.selectedLanguage)
 	}
 
-	// COMPONENT METHODS
-	updateLanguage(lang){
 
+	// COMPONENT METHODS
 	/*
 	- Here we are recieveing the language and passing lang in to change the state.
 	- We also bind this to the constructor.
+	- We also call fetchPopularRepost every time update Language is called and pass it lang, so that we get a view of currently selected langages via our git API call.
 	*/
 
+	updateLanguage(lang){
 		this.setState(() => {
 			return {
 				selectedLanguage: lang,
@@ -48,7 +51,7 @@ class Popular extends React.Component {
 					repos: repos
 				}
 			})
-		})  // }.bind(this), no longer necessary with arrow functions. The 'this keyword, which would normally be encapsulated in the encolsing function's scope, has access to the function's outer scope.
+		})  // }.bind(this), no longer necessary with arrow functions. The this keyword, which would normally be encapsulated in the enclosing function's scope, has access to the function's immediate outer scope.
 	}
 
 	// RENDER METHOD

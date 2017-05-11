@@ -40,7 +40,7 @@ export default class Battle extends React.Component {
 
   render() {
 
-    let match = this.props.match
+    let match = this.props.match // what is this?
     let playerOneName = this.state.playerOneName
     let playerTwoName = this.state.playerTwoName
     let playerOneImage = this.state.playerOneImage
@@ -48,7 +48,7 @@ export default class Battle extends React.Component {
 
     return (
       <div>
-        <div className="row">
+        <div className="row">  {/* WHAT is this syntax? */}
           {!playerOneName &&
             <PlayerInput
               id="playerOne"
