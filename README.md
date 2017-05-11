@@ -20,3 +20,5 @@
 3. $ npm start
 
 4. Visit localhost:3001 in your browser
+
+5. https://gitbattle-f2654.firebaseapp.com
